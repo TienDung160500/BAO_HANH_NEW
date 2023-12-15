@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-san-pham-heading" data-cy="SanPhamCreateUpdateHeading">Create or edit a San Pham</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_sapCode">Sap Code</label>
+          <input type="text" class="form-control" name="sapCode" id="field_sapCode" data-cy="sapCode" formControlName="sapCode" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_rdCode">Rd Code</label>
+          <input type="text" class="form-control" name="rdCode" id="field_rdCode" data-cy="rdCode" formControlName="rdCode" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_donVi">Don Vi</label>
+          <input type="text" class="form-control" name="donVi" id="field_donVi" data-cy="donVi" formControlName="donVi" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_toSanXuat">To San Xuat</label>
+          <input type="text" class="form-control" name="toSanXuat" id="field_toSanXuat" data-cy="toSanXuat" formControlName="toSanXuat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_phanLoai">Phan Loai</label>
+          <input type="text" class="form-control" name="phanLoai" id="field_phanLoai" data-cy="phanLoai" formControlName="phanLoai" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nhomSanPham">Nhom San Pham</label>
+          <select class="form-control" id="field_nhomSanPham" data-cy="nhomSanPham" name="nhomSanPham" formControlName="nhomSanPham">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                nhomSanPhamOption.id === editForm.get('nhomSanPham')!.value?.id ? editForm.get('nhomSanPham')!.value : nhomSanPhamOption
+              "
+              *ngFor="let nhomSanPhamOption of nhomSanPhamsSharedCollection; trackBy: trackNhomSanPhamById"
+            >
+              {{ nhomSanPhamOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_kho">Kho</label>
+          <select class="form-control" id="field_kho" data-cy="kho" name="kho" formControlName="kho">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="khoOption.id === editForm.get('kho')!.value?.id ? editForm.get('kho')!.value : khoOption"
+              *ngFor="let khoOption of khosSharedCollection; trackBy: trackKhoById"
+            >
+              {{ khoOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nganh">Nganh</label>
+          <select class="form-control" id="field_nganh" data-cy="nganh" name="nganh" formControlName="nganh">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="nganhOption.id === editForm.get('nganh')!.value?.id ? editForm.get('nganh')!.value : nganhOption"
+              *ngFor="let nganhOption of nganhsSharedCollection; trackBy: trackNganhById"
+            >
+              {{ nganhOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_chungLoai">Chung Loai</label>
+          <select class="form-control" id="field_chungLoai" data-cy="chungLoai" name="chungLoai" formControlName="chungLoai">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="chungLoaiOption.id === editForm.get('chungLoai')!.value?.id ? editForm.get('chungLoai')!.value : chungLoaiOption"
+              *ngFor="let chungLoaiOption of chungLoaisSharedCollection; trackBy: trackChungLoaiById"
+            >
+              {{ chungLoaiOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

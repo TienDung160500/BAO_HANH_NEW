@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mariadb://localhost:3306/Doi_tra?useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mariadb://localhost:3306/doi_tra?useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password:
+    password: binh143
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -67,7 +67,7 @@ spring:
         enabled: true
 
 server:
-  port: 8080
+  port: 8086
 
 # ===================================================================
 # JHipster specific properties

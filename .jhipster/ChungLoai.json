@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20231215104347",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "chung_loai",
+  "fields": [
+    {
+      "fieldName": "maChungLoai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tenChungLoai",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ngayTao",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "username",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ChungLoai",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "nhomSanPham",
+      "otherEntityRelationshipName": "chungLoai",
+      "relationshipName": "nhomSanPham",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "sanPham",
+      "otherEntityRelationshipName": "chungLoai",
+      "relationshipName": "sanPham",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

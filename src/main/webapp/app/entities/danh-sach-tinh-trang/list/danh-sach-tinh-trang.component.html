@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading" data-cy="DanhSachTinhTrangHeading">
+    <span>Danh Sach Tinh Trangs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-danh-sach-tinh-trang"
+        [routerLink]="['/danh-sach-tinh-trang/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Danh Sach Tinh Trang </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="danhSachTinhTrangs?.length === 0">
+    <span>No danhSachTinhTrangs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="danhSachTinhTrangs && danhSachTinhTrangs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Ten Tinh Trang Phan Loai</span></th>
+          <th scope="col"><span>Ngay Tao</span></th>
+          <th scope="col"><span>Ngay Cap Nhat</span></th>
+          <th scope="col"><span>Username</span></th>
+          <th scope="col"><span>Trang Thai</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let danhSachTinhTrang of danhSachTinhTrangs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/danh-sach-tinh-trang', danhSachTinhTrang.id, 'view']">{{ danhSachTinhTrang.id }}</a>
+          </td>
+          <td>{{ danhSachTinhTrang.tenTinhTrangPhanLoai }}</td>
+          <td>{{ danhSachTinhTrang.ngayTao | formatMediumDatetime }}</td>
+          <td>{{ danhSachTinhTrang.ngayCapNhat | formatMediumDatetime }}</td>
+          <td>{{ danhSachTinhTrang.username }}</td>
+          <td>{{ danhSachTinhTrang.trangThai }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/danh-sach-tinh-trang', danhSachTinhTrang.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/danh-sach-tinh-trang', danhSachTinhTrang.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(danhSachTinhTrang)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
